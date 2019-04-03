@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">TweetFeed</string>
+    <string name="trending_list_title_team">Tending Teams</string>
+    <string name="trending_list_title_player">Tending Players</string>
+    <string name="trending_list_empty">No Tending Items Added</string>
+
+    <string name="menu_category">Category Switch</string>
+    <string name="menu_interval">Interval Switch</string>
+
+    <string name="trending_detail_show_tweets">Tweets</string>
+    <string name="trending_detail_show_activity">Activity Trend</string>
+    <string name="trending_detail_show_sentiment">Sentiment Trend</string>
+    <string name="trending_detail_show_topics">Trending Topics</string>
+
+    <string name="tweet_screen_tweet_count_label">Tweets</string>
+    <string name="tweet_screen_following_count_label">Following</string>
+    <string name="tweet_screen_follower_count_label">Followers</string>
+    <string name="tweet_screen_tweets_by">Tweets by %s</string>
+    <string name="tweet_screen_tweets_on">Tweets on %s</string>
+    <string name="tweet_list_empty">No Tweet</string>
+
+    <string name="loading">Loading ...</string>
+    <string name="loading_trending">Loading Trending Data ...</string>
+    <string name="loading_tweet">Loading Tweets ...</string>
+    <string name="loading_failed">Sync with Server Failed</string>
+
+    <string name="empty">No data</string>
+    <string name="empty_trending">No trending</string>
+    <string name="empty_tweet">No tweets</string>
+</resources>

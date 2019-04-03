@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/item_info_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/trending_details_section_margin"
+        android:layout_marginBottom="@dimen/trending_details_section_margin">
+
+        <ImageView
+            android:id="@+id/trending_detail_image"
+            android:layout_width="@dimen/trending_details_image_size"
+            android:layout_height="@dimen/trending_details_image_size"
+            android:layout_margin="@dimen/trending_details_image_margin"
+            android:src="@drawable/team"/>
+
+        <TextView
+            android:id="@+id/trending_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/trending_detail_image"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/trending_details_image_margin"
+            android:text="@string/trending_list_title_team"
+            android:textSize="@dimen/trending_details_primary_font_size"/>
+
+        <TextView
+            android:id="@+id/trending_detail_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/trending_detail_image"
+            android:layout_below="@id/trending_detail_name"
+            android:layout_marginTop="@dimen/trending_details_image_margin"
+            android:text="@string/trending_list_title_team"
+            android:textSize="@dimen/trending_details_secondary_font_size"/>
+
+        <TextView
+            android:id="@+id/trending_detail_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/trending_detail_nickname"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/trending_details_image_margin"
+            android:text="@string/trending_list_title_team"
+            android:textSize="@dimen/trending_details_secondary_font_size"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/item_action_section"
+        android:layout_below="@id/item_info_section"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/trending_detail_show_tweets"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/trending_details_item_height"
+            android:text="@string/trending_detail_show_tweets"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/trending_details_secondary_font_size"/>
+
+        <Button
+            android:id="@+id/trending_detail_show_activity"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/trending_details_item_height"
+            android:text="@string/trending_detail_show_activity"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/trending_details_secondary_font_size"/>
+
+        <Button
+            android:id="@+id/trending_detail_show_sentiment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/trending_details_item_height"
+            android:text="@string/trending_detail_show_sentiment"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/trending_details_secondary_font_size"/>
+
+        <Button
+            android:id="@+id/trending_detail_show_topics"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/trending_details_item_height"
+            android:text="@string/trending_detail_show_topics"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/trending_details_secondary_font_size"/>
+
+    </LinearLayout>
+</RelativeLayout>

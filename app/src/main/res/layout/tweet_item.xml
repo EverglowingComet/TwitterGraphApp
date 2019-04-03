@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sammy.tweetfeed.listview.TweetListItem
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="@dimen/tweet_item_max_height">
+
+        <ImageView
+            android:id="@+id/tweet_user_icon"
+            android:layout_width="@dimen/tweet_icon_size"
+            android:layout_height="@dimen/tweet_icon_size"
+            android:layout_margin="@dimen/tweet_primary_margin"
+            android:src="@drawable/player"/>
+
+        <TextView
+            android:id="@+id/tweet_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tweet_user_icon"
+            android:layout_marginTop="@dimen/tweet_primary_margin"
+            android:layout_marginStart="@dimen/tweet_secondary_margin"
+            android:layout_marginEnd="@dimen/tweet_primary_margin"
+            android:layout_marginBottom="@dimen/tweet_secondary_margin"
+            android:textSize="@dimen/tweet_secondary_font_size"/>
+
+        <TextView
+            android:id="@+id/tweet_item_text"
+            android:layout_toRightOf="@id/tweet_user_icon"
+            android:layout_below="@id/tweet_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tweet_primary_margin"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/tweet_action_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content_layout"
+        android:gravity="end">
+        <ImageView
+            android:id="@+id/tweet_favorite_btn"
+            android:layout_width="@dimen/tweet_item_btn_size"
+            android:layout_height="@dimen/tweet_item_btn_size"
+            android:layout_margin="@dimen/tweet_secondary_margin"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/tweet_retweet"/>
+
+        <TextView
+            android:id="@+id/tweet_favorite"
+            android:layout_width="@dimen/tweet_item_btn_size"
+            android:layout_height="@dimen/tweet_item_btn_size"
+            android:layout_margin="@dimen/tweet_secondary_margin"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textSize="@dimen/tweet_secondary_font_size"
+            android:layout_toLeftOf="@id/tweet_favorite_btn"/>
+
+        <ImageView
+            android:id="@+id/tweet_retweet_btn"
+            android:layout_width="@dimen/tweet_item_btn_size"
+            android:layout_height="@dimen/tweet_item_btn_size"
+            android:layout_margin="@dimen/tweet_secondary_margin"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tweet_favorite"
+            android:src="@drawable/tweet_favorite"/>
+
+        <TextView
+            android:id="@+id/tweet_retweet"
+            android:layout_width="@dimen/tweet_item_btn_size"
+            android:layout_height="@dimen/tweet_item_btn_size"
+            android:layout_margin="@dimen/tweet_secondary_margin"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textSize="@dimen/tweet_secondary_font_size"
+            android:layout_toLeftOf="@id/tweet_retweet_btn"/>
+
+    </RelativeLayout>
+
+</com.sammy.tweetfeed.listview.TweetListItem>

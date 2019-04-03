@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sammy.tweetfeed.listview.TrendingListItem
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/trending_list_item_height">
+
+    <ImageView
+        android:id="@+id/tending_list_item_icon"
+        android:layout_width="@dimen/trending_list_item_icon_size"
+        android:layout_height="@dimen/trending_list_item_icon_size"
+        android:layout_margin="@dimen/trending_list_item_info_margin"/>
+
+    <TextView
+        android:id="@+id/tending_list_item_success"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/trending_list_item_secondary_info_width"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/trending_list_item_main_title_size"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tending_list_title"
+        android:layout_toRightOf="@id/tending_list_item_icon"
+        android:layout_toLeftOf="@id/tending_list_item_success"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/trending_list_item_main_title_size"
+        android:gravity="center_vertical" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_size"
+        android:background="@color/trending_list_divider_color"
+        android:layout_alignParentBottom="true"/>
+</com.sammy.tweetfeed.listview.TrendingListItem>

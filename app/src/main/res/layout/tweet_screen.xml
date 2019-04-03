@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/user_info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="@dimen/tweet_icon_size"
+            android:layout_height="@dimen/tweet_icon_size"
+            android:layout_marginStart="@dimen/tweet_large_margin"
+            android:layout_marginEnd="@dimen/tweet_large_margin"
+            android:layout_marginTop="@dimen/tweet_primary_margin"
+            android:layout_marginBottom="@dimen/tweet_primary_margin"/>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/user_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/tweet_primary_font_size"
+            android:layout_marginEnd="@dimen/tweet_primary_margin"
+            android:text="@string/trending_list_title_team"/>
+
+        <TextView
+            android:id="@+id/user_id"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/tweet_detail_font_size"
+            android:layout_marginEnd="@dimen/tweet_primary_margin"
+            android:text="@string/trending_list_title_team"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/tweet_info"
+        android:layout_below="@id/user_info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tweet_primary_margin"
+        android:layout_marginBottom="@dimen/tweet_primary_margin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/tweet_count_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tweet_secondary_font_size"
+                android:text="@string/tweet_screen_tweet_count_label"/>
+
+            <TextView
+                android:id="@+id/tweet_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tweet_secondary_font_size"
+                android:text="@string/tweet_screen_tweet_count_label"
+                android:textColor="@color/tweet_info_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/following_count_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tweet_secondary_font_size"
+                android:text="@string/tweet_screen_following_count_label"/>
+
+            <TextView
+                android:id="@+id/following_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tweet_secondary_font_size"
+                android:text="@string/tweet_screen_tweet_count_label"
+                android:textColor="@color/tweet_info_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/follower_count_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tweet_secondary_font_size"
+                android:text="@string/tweet_screen_follower_count_label"/>
+
+            <TextView
+                android:id="@+id/follower_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tweet_secondary_font_size"
+                android:text="@string/tweet_screen_tweet_count_label"
+                android:textColor="@color/tweet_info_color"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tweet_action_switch_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tweet_info"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/tweet_large_margin"
+        android:layout_marginBottom="@dimen/tweet_large_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tweets_by"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tweet_large_margin"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/tweeter_switcher_bg_selected"
+            android:textSize="@dimen/tweet_secondary_font_size"
+            android:text="@string/tweet_screen_tweets_by"/>
+
+        <TextView
+            android:id="@+id/tweets_on"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/tweet_large_margin"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/tweeter_switcher_right_bg_unselected"
+            android:textSize="@dimen/tweet_secondary_font_size"
+            android:text="@string/tweet_screen_tweets_on"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/tweet_list_layout"
+        android:layout_below="@id/tweet_action_switch_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/tweet_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tweet_empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/trending_list_empty"/>
+    </RelativeLayout>
+</RelativeLayout>

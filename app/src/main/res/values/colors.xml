@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="actionbar_divder_color">#BBBBBBBB</color>
+    <color name="trending_list_divider_color">#ed7d31</color>
+
+    <color name="tweet_info_color">#ed7d31</color>
+</resources>

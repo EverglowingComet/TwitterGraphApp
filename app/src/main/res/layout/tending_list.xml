@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.TrendingListActivity">
+<!--
+    <RelativeLayout
+        android:id="@+id/custom_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/custom_action_bar_size">
+        <ImageView
+            android:id="@+id/category_switcher"
+            android:src="@drawable/team"
+            android:layout_margin="@dimen/custom_action_bar_icon_margin"
+            android:layout_width="@dimen/custom_action_bar_icon_size"
+            android:layout_height="@dimen/custom_action_bar_icon_size" />
+        <ImageButton
+            android:id="@+id/add_player"
+            android:src="@drawable/add_player"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/custom_action_bar_icon_margin"
+            android:layout_width="@dimen/custom_action_bar_icon_size"
+            android:layout_height="@dimen/custom_action_bar_icon_size" />
+        <Spinner
+            android:id="@+id/timespan_switcher"
+            android:layout_toLeftOf="@id/add_player"
+            android:background="@drawable/time"
+            android:layout_width="@dimen/custom_action_bar_icon_size"
+            android:layout_height="@dimen/custom_action_bar_icon_size"
+            android:layout_margin="@dimen/custom_action_bar_icon_margin">
+            
+        </Spinner>
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_toRightOf="@id/category_switcher"
+            android:layout_toLeftOf="@id/timespan_switcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/custom_action_bar_icon_margin"
+            android:text="@string/tending_list_title_team"
+            android:gravity="center"/>
+    </RelativeLayout>
+    <View
+        android:id="@+id/custom_action_bar_divider"
+        android:layout_below="@id/custom_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_size"
+        android:background="@color/actionbar_divder_color"/>
+
+-->
+    <ListView
+        android:id="@+id/tending_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--
+        android:layout_below="@id/custom_action_bar"
+        -->
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trending_list_empty"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+</RelativeLayout>

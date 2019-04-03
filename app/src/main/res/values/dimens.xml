@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="custom_action_bar_title_size">10dip</dimen>
+
+    <dimen name="custom_action_bar_icon_margin">3dip</dimen>
+    <dimen name="custom_action_bar_icon_size">64dip</dimen>
+    <dimen name="custom_action_bar_size">70dip</dimen>
+    <dimen name="action_bar_icon_size">50dip</dimen>
+
+    <dimen name="divider_size">2px</dimen>
+
+    <dimen name="trending_list_item_height">80dip</dimen>
+    <dimen name="trending_list_item_icon_size">70dip</dimen>
+    <dimen name="trending_list_item_info_margin">5dip</dimen>
+    <dimen name="trending_list_item_main_title_size">20dip</dimen>
+    <dimen name="trending_list_item_secondary_info_width">80dip</dimen>
+
+    <dimen name="trending_details_section_margin">50dip</dimen>
+    <dimen name="trending_details_item_height">80dip</dimen>
+    <dimen name="trending_details_image_size">100dip</dimen>
+    <dimen name="trending_details_image_margin">15dip</dimen>
+    <dimen name="trending_details_title_font_size">30dip</dimen>
+    <dimen name="trending_details_primary_font_size">20dip</dimen>
+    <dimen name="trending_details_secondary_font_size">15dip</dimen>
+
+
+    <dimen name="tweet_section_margin">20dip</dimen>
+    <dimen name="tweet_icon_size">80dip</dimen>
+    <dimen name="tweet_action_icon_size">30dip</dimen>
+    <dimen name="tweet_item_max_height">300dip</dimen>
+    <dimen name="tweet_item_btn_size">40dip</dimen>
+    <dimen name="tweet_primary_font_size">20dip</dimen>
+    <dimen name="tweet_secondary_font_size">15dip</dimen>
+    <dimen name="tweet_detail_font_size">10dip</dimen>
+    <dimen name="tweet_large_margin">20dip</dimen>
+    <dimen name="tweet_primary_margin">10dip</dimen>
+    <dimen name="tweet_secondary_margin">5dip</dimen>
+
+</resources>
