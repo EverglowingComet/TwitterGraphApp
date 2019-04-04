@@ -57,7 +57,7 @@ public class TrendingListActivity extends AppCompatActivity implements View.OnCl
     private static final int[] interval_spinner_images = {
             R.drawable.interval_6hrs,
             R.drawable.interval_12hrs,
-            R.drawable.interval_1day,
+            R.drawable.interval_24hrs,
             R.drawable.interval_2days,
             R.drawable.interval_3days,
             R.drawable.interval_1week,
@@ -210,7 +210,7 @@ public class TrendingListActivity extends AppCompatActivity implements View.OnCl
     private void setListMode(boolean team) {
         isTeamList = team;
 //        mSwitchTeamPlayer.setImageResource(isTeamList ? R.drawable.team : R.drawable.player);
-        mActionBar.setLogo(isTeamList ? R.drawable.team : R.drawable.player);
+        mActionBar.setLogo(isTeamList ? R.drawable.actionbar_team : R.drawable.actionbar_player);
         mActionBar.setTitle(isTeamList ? R.string.trending_list_title_team : R.string.trending_list_title_player);
         postServerData(mInterval);
         updateListView();

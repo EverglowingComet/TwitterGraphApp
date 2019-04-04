@@ -50,10 +50,19 @@
         android:background="@color/actionbar_divder_color"/>
 
 -->
-    <ListView
-        android:id="@+id/tending_list_view"
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:elevation="3dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/tending_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.CardView>
+
+
     <!--
         android:layout_below="@id/custom_action_bar"
         -->

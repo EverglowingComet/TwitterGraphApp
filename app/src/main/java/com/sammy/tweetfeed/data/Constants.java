@@ -9,4 +9,6 @@ public class Constants {
     public static final String KEY_SHARE_VOICE = "share_voice";
     public static final String KEY_TEAM = "name";
     public static final String KEY_INTERVAL = "interval";
+
+    public static final int TWEET_PAGE_SIZE = 25;
 }

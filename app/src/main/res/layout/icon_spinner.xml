@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/action_bar_icon_size"
     android:layout_height="@dimen/action_bar_icon_size"
+    android:padding="@dimen/action_bar_icon_padding"
     android:src="@drawable/team">
 
 </ImageView>

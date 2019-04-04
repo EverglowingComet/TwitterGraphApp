@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +21,6 @@ import com.sammy.tweetfeed.listview.TweetListAdapter;
 import com.sammy.tweetfeed.transfer.TweetAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TweetListActivity extends AppCompatActivity implements View.OnClickListener, TweetAdapter.TweetPostListener {
@@ -36,6 +35,9 @@ public class TweetListActivity extends AppCompatActivity implements View.OnClick
     private TextView mTweetOnView;
     private ListView mListView;
     private TextView mEmptyView;
+    private TextView mNavPage;
+    private ImageButton mNavNext;
+    private ImageButton mNavPrev;
 
     private String mUserName;
     private String mImageURL;
@@ -47,6 +49,7 @@ public class TweetListActivity extends AppCompatActivity implements View.OnClick
     private boolean mIsTeam = true;
     private int mInterval = 24;
     private int mPage = 1;
+    private int mPageCount = 1;
 
     private TweetAdapter mServerDataAdapter;
     private ArrayList<TweetItem> mItems = new ArrayList<>();
@@ -97,6 +100,12 @@ public class TweetListActivity extends AppCompatActivity implements View.OnClick
         mTweetOnView = (TextView) findViewById(R.id.tweets_on);
         mTweetByView.setOnClickListener(this);
         mTweetOnView.setOnClickListener(this);
+        mNavPage = (TextView) findViewById(R.id.tweet_nav_page);
+        mNavNext = (ImageButton) findViewById(R.id.tweet_nav_next);
+        mNavPrev = (ImageButton) findViewById(R.id.tweet_nav_prev);
+        mNavPage.setText(String.valueOf(mPage));
+        mNavNext.setOnClickListener(this);
+        mNavPrev.setOnClickListener(this);
 
         mEmptyView = (TextView) findViewById(R.id.tweet_empty_view);
         mListView = (ListView) findViewById(R.id.tweet_list_view);
@@ -139,10 +148,31 @@ public class TweetListActivity extends AppCompatActivity implements View.OnClick
                 mIsTweetBy = false;
                 updateTweetSwitcher();
                 break;
+            case R.id.tweet_nav_next:
+                progressPage(true);
+                break;
+            case R.id.tweet_nav_prev:
+                progressPage(false);
+                break;
         }
     }
 
     // UI functions
+    private void progressPage(boolean next) {
+        boolean changed = false;
+        if (mPage > 1 && !next) {
+            mPage--;
+            changed = true;
+        } else if (mPage < mPageCount && next) {
+            mPage++;
+            changed = true;
+        }
+        if (changed) {
+            mNavPage.setText(String.valueOf(mPage));
+            postUpdate(mPage);
+        }
+    }
+
     private void updateTweetSwitcher() {
         mTweetByView.setBackgroundResource(mIsTweetBy ?
                 R.drawable.tweeter_switcher_bg_selected : R.drawable.tweeter_switcher_bg_unselected);
@@ -153,6 +183,8 @@ public class TweetListActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void tweetPostCompleted(ArrayList<TweetItem> result, int tweet_count, int follower_count, int following_count) {
         mTweetCount = tweet_count;
+        mPageCount = tweet_count / Constants.TWEET_PAGE_SIZE + (tweet_count % Constants.TWEET_PAGE_SIZE == 0 ? 0 : 1);
+
         mTweetFollowerCount = follower_count;
         mTweetFollowingCount = following_count;
 

@@ -5,7 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="actionbar_divder_color">#BBBBBBBB</color>
-    <color name="trending_list_divider_color">#ed7d31</color>
+    <color name="trending_list_divider_color">#81B2DE</color>
 
     <color name="tweet_info_color">#ed7d31</color>
 </resources>
