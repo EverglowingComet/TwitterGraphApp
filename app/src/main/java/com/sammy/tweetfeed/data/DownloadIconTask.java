@@ -1,6 +1,8 @@
 package com.sammy.tweetfeed.data;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -10,20 +12,22 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 public class DownloadIconTask extends AsyncTask<String, Void, Bitmap> {
-    ImageView bmImage;
-    int mDefaultResId;
-    String urldisplay;
+    private ImageView imageView;
+    private int mDefaultResId;
+    private String imgUrl;
+    private Context mContext;
 
-    public DownloadIconTask(ImageView bmImage, int defaultResId) {
-        this.bmImage = bmImage;
+    public DownloadIconTask(Context activity, ImageView bmImage, int defaultResId) {
+        mContext = activity;
+        imageView = bmImage;
         mDefaultResId = defaultResId;
     }
 
     protected Bitmap doInBackground(String... urls) {
-        urldisplay = urls[0];
+        imgUrl = urls[0];
         Bitmap mIcon11 = null;
         try {
-            InputStream in = new java.net.URL(urldisplay).openStream();
+            InputStream in = new java.net.URL(imgUrl).openStream();
             mIcon11 = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
@@ -33,11 +37,15 @@ public class DownloadIconTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
-        AppDataCache.sTweetIconCash.put(urldisplay, result);
         if (result != null) {
-            bmImage.setImageBitmap(result);
+            AppDataCache.sTweetIconCash.put(imgUrl, result);
+            AppDataCache.sDownloadingURL.remove(imgUrl);
+            AppDataCache.sDownloadedURL.put(imgUrl, true);
+            imageView.setImageBitmap(result);
         } else {
-            bmImage.setImageResource(mDefaultResId);
+            AppDataCache.sDownloadingURL.remove(imgUrl);
+            AppDataCache.sDownloadedURL.put(imgUrl, false);
+            imageView.setImageResource(mDefaultResId);
         }
     }
 }

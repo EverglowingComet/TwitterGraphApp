@@ -32,13 +32,14 @@
     <dimen name="tweet_action_icon_size">30dip</dimen>
     <dimen name="tweet_item_max_height">300dip</dimen>
     <dimen name="tweet_item_btn_size">40dip</dimen>
-    <dimen name="tweet_primary_font_size">20dip</dimen>
-    <dimen name="tweet_secondary_font_size">15dip</dimen>
-    <dimen name="tweet_detail_font_size">10dip</dimen>
-    <dimen name="tweet_large_margin">20dip</dimen>
-    <dimen name="tweet_primary_margin">10dip</dimen>
-    <dimen name="tweet_secondary_margin">5dip</dimen>
     <dimen name="tweet_nav_btn_size">20dip</dimen>
     <dimen name="tweet_nav_text_size">15dip</dimen>
 
+    <dimen name="primary_font_size">20dip</dimen>
+    <dimen name="secondary_font_size">15dip</dimen>
+    <dimen name="detail_font_size">10dip</dimen>
+
+    <dimen name="large_margin">20dip</dimen>
+    <dimen name="primary_margin">10dip</dimen>
+    <dimen name="secondary_margin">5dip</dimen>
 </resources>

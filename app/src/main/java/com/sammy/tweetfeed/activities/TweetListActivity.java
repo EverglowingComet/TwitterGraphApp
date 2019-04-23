@@ -17,6 +17,7 @@ import com.sammy.tweetfeed.data.AppDataCache;
 import com.sammy.tweetfeed.data.Constants;
 import com.sammy.tweetfeed.data.DownloadImageTask;
 import com.sammy.tweetfeed.data.TweetItem;
+import com.sammy.tweetfeed.data.UserInfo;
 import com.sammy.tweetfeed.listview.TweetListAdapter;
 import com.sammy.tweetfeed.transfer.TweetAdapter;
 
@@ -39,14 +40,11 @@ public class TweetListActivity extends AppCompatActivity implements View.OnClick
     private ImageButton mNavNext;
     private ImageButton mNavPrev;
 
-    private String mUserName;
-    private String mImageURL;
-    private String mUserTwitter;
+    private UserInfo mUserInfo;
     private boolean mIsTweetBy = true;
     private int mTweetCount = 0;
     private int mTweetFollowingCount = 0;
     private int mTweetFollowerCount = 0;
-    private boolean mIsTeam = true;
     private int mInterval = 24;
     private int mPage = 1;
     private int mPageCount = 1;
@@ -111,26 +109,22 @@ public class TweetListActivity extends AppCompatActivity implements View.OnClick
         mListView = (ListView) findViewById(R.id.tweet_list_view);
         mListView.setEmptyView(mEmptyView);
 
-        Intent intent = getIntent();
-        mUserName = intent.getStringExtra(Constants.KEY_NAME);
-        mImageURL = intent.getStringExtra(Constants.KEY_IMAGE_URL);
-        mUserTwitter = intent.getStringExtra(Constants.KEY_TWITTER);
-        mIsTeam = intent.getBooleanExtra(Constants.KEY_TEAM, true);
-        mInterval = intent.getIntExtra(Constants.KEY_INTERVAL, 24);
+        mUserInfo = UserInfo.fromIntent(getIntent());
+        mInterval = getIntent().getIntExtra(Constants.KEY_INTERVAL, 24);
 
-        if (AppDataCache.sIconCash.containsKey(mImageURL)) {
-            mIconView.setImageBitmap(AppDataCache.sIconCash.get(mImageURL));
+        if (AppDataCache.sIconCash.containsKey(mUserInfo.mImageURL)) {
+            mIconView.setImageBitmap(AppDataCache.sIconCash.get(mUserInfo.mImageURL));
         } else {
-            new DownloadImageTask(mIconView, mIsTeam ? R.drawable.team : R.drawable.player).execute(mImageURL);
-            mIconView.setImageResource(mIsTeam ? R.drawable.team : R.drawable.player);
+            new DownloadImageTask(mIconView, mUserInfo.mIsTeam ? R.drawable.team : R.drawable.player).execute(mUserInfo.mImageURL);
+            mIconView.setImageResource(mUserInfo.mIsTeam ? R.drawable.team : R.drawable.player);
         }
 
-        mNameView.setText(mUserName);
-        mTweetHandleView.setText(mUserTwitter);
-        mTweetByView.setText(String.format(getString(R.string.tweet_screen_tweets_by), mUserName));
-        mTweetOnView.setText(String.format(getString(R.string.tweet_screen_tweets_on), mUserName));
+        mNameView.setText(mUserInfo.mName);
+        mTweetHandleView.setText(mUserInfo.mTwitterHandle);
+        mTweetByView.setText(String.format(getString(R.string.tweet_screen_tweets_by), mUserInfo.mName));
+        mTweetOnView.setText(String.format(getString(R.string.tweet_screen_tweets_on), mUserInfo.mName));
 
-        mServerDataAdapter = new TweetAdapter(mUserName, mInterval, mPage, mIsTeam, this);
+        mServerDataAdapter = new TweetAdapter(mUserInfo.mName, mInterval, mPage, mUserInfo.mIsTeam, this);
         postUpdate(mPage);
 
         mListAdapter = new TweetListAdapter(this, 0, mItems);
@@ -169,6 +163,7 @@ public class TweetListActivity extends AppCompatActivity implements View.OnClick
         }
         if (changed) {
             mNavPage.setText(String.valueOf(mPage));
+            AppDataCache.cleanTweetCache();
             postUpdate(mPage);
         }
     }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/interval_tab"
+        android:layout_below="@id/action_switch_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/primary_margin">
+
+        <com.yarolegovich.discretescrollview.DiscreteScrollView
+            android:id="@+id/interval_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dsv_orientation="horizontal" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/graph_layout"
+        android:layout_below="@id/interval_tab"
+        android:layout_above="@+id/tweet_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:layout_margin="10dp"
+            android:elevation="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v7.widget.CardView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

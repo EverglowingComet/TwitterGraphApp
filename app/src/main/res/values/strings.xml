@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">TweetFeed</string>
-    <string name="trending_list_title_team">Tending Teams</string>
-    <string name="trending_list_title_player">Tending Players</string>
+    <string name="app_name">ThroneTweets</string>
+    <string name="trending_list_title_team">Trending Teams</string>
+    <string name="trending_list_title_player">Trending Players</string>
     <string name="trending_list_empty">No Tending Items Added</string>
 
     <string name="menu_category">Category Switch</string>
     <string name="menu_interval">Interval Switch</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_compare">Compare</string>
 
     <string name="trending_detail_show_tweets">Tweets</string>
     <string name="trending_detail_show_activity">Activity Trend</string>
@@ -27,4 +29,26 @@
     <string name="empty">No data</string>
     <string name="empty_trending">No trending</string>
     <string name="empty_tweet">No tweets</string>
+
+    <string name="past_interval_6_hours">Past 6 hours</string>
+    <string name="past_interval_12_hours">Past 12 hours</string>
+    <string name="past_interval_24_hours">Past 24 hours</string>
+    <string name="past_interval_2_days">Past 2 days</string>
+    <string name="past_interval_3_days">Past 3 days</string>
+    <string name="past_interval_1_week">Past 1 week</string>
+    <string name="past_interval_15_days">Past 15 days</string>
+
+
+    <string name="activity_per_tweet">Per Tweet</string>
+    <string name="activity_per_message">Per Message</string>
+    <string name="activity_per_favorite">Per Favorite</string>
+
+
+    <string name="activity_title_detail">Details</string>
+    <string name="activity_title_tweet_list">Tweet List</string>
+    <string name="activity_title_sentimental">Sentimental Trend</string>
+    <string name="activity_title_activity">Activity Trend</string>
+    <string name="activity_title_topics">Trending Topics</string>
+    <string name="activity_title_compare_activity">Activity Compare</string>
+    <string name="activity_title_compare_sentimental">Sentimental Compare</string>
 </resources>

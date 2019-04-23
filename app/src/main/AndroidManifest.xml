@@ -18,8 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.TrendingDetailActivity" />
-        <activity android:name=".activities.TweetListActivity" />
+        <activity android:name=".activities.TrendingDetailActivity"
+            android:label="@string/activity_title_detail"/>
+        <activity android:name=".activities.TweetListActivity"
+            android:label="@string/activity_title_tweet_list" />
+        <activity android:name=".activities.ActivityGraphAnalysis"
+            android:label="@string/activity_title_activity" />
+        <activity android:name=".activities.SentimentGraphAnalysis"
+            android:label="@string/activity_title_sentimental" />
+        <activity android:name=".activities.ActivityGraphCompare"
+            android:label="@string/activity_title_compare_activity" />
+        <activity android:name=".activities.SentimentalGraphCompare"
+            android:label="@string/activity_title_compare_sentimental" />
+        <activity android:name=".activities.TrendingTopicsActivity"
+            android:label="@string/activity_title_topics" />
     </application>
 
 </manifest>

@@ -8,6 +8,10 @@ import java.util.Iterator;
 public class AppDataCache {
     public static HashMap<String, Bitmap> sIconCash = new HashMap<>();
     public static HashMap<String, Bitmap> sTweetIconCash = new HashMap<>();
+    public static HashMap<String, Boolean> sDownloadingURL = new HashMap<>();
+    public static HashMap<String, Boolean> sDownloadedURL = new HashMap<>();
+    public static HashMap<String, Boolean> sTweetDownloadingURL = new HashMap<>();
+    public static HashMap<String, Boolean> sTweetDownloadedURL = new HashMap<>();
 
     public static void cleanTweetCache() {
         Iterator<Bitmap> iterator = sTweetIconCash.values().iterator();
@@ -18,5 +22,6 @@ public class AppDataCache {
             }
         }
         sTweetIconCash.clear();
+        sTweetDownloadedURL.clear();
     }
 }

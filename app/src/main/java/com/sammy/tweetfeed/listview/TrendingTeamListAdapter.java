@@ -30,11 +30,6 @@ public class TrendingTeamListAdapter extends ArrayAdapter<TrendingTeam> {
         TrendingListItem item_view;
         if (convertView != null) {
             item_view = (TrendingListItem) convertView;
-            if (item_view.mIconBitmap != null && !AppDataCache.sIconCash.containsKey(item_view.mIconURL)) {
-                AppDataCache.sIconCash.put(item_view.mIconURL, item_view.mIconBitmap);
-            } else {
-                item_view.mIconBitmap = null;
-            }
         } else {
             item_view = (TrendingListItem) LayoutInflater.from(mContext).inflate(R.layout.tending_list_item, null);
         }

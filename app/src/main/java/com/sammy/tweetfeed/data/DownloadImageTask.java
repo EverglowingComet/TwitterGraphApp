@@ -33,8 +33,8 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
-        AppDataCache.sIconCash.put(urldisplay, result);
         if (result != null) {
+            AppDataCache.sIconCash.put(urldisplay, result);
             bmImage.setImageBitmap(result);
         } else {
             bmImage.setImageResource(mDefaultResId);

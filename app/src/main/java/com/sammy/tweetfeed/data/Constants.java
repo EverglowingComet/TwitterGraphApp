@@ -11,4 +11,5 @@ public class Constants {
     public static final String KEY_INTERVAL = "interval";
 
     public static final int TWEET_PAGE_SIZE = 25;
+    public static final int DEFAULT_INTERVAL = 24;
 }

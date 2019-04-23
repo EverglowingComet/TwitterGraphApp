@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sammy.tweetfeed.R;
+import com.sammy.tweetfeed.data.AppDataCache;
 import com.sammy.tweetfeed.data.TrendingPlayer;
 import com.sammy.tweetfeed.data.TrendingTeam;
 
@@ -18,13 +19,15 @@ import java.io.InputStream;
 
 public class TrendingListItem extends RelativeLayout {
 
-    public Bitmap mIconBitmap = null;
     public String mIconURL = null;
+    public Bitmap mImageBitmap = null;
     public static String TAG = "TendingListItem";
 
-    private ImageView mIcon = null;
+    private ImageView mImageView = null;
     private TextView mTitle = null;
     private TextView mGameInfo = null;
+
+    public DownloadIconTask mDownloadTask = null;
 
     public TrendingListItem(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -35,21 +38,29 @@ public class TrendingListItem extends RelativeLayout {
     }
 
     public void setDefaultIcon() {
-        mIcon.setImageResource(R.drawable.team);
+        mImageView.setImageResource(R.drawable.team);
     }
 
     public void bindView(TrendingTeam team, Bitmap iconbitmap) {
-        mIcon = (ImageView) findViewById(R.id.tending_list_item_icon);
+        mImageView = (ImageView) findViewById(R.id.tending_list_item_icon);
         mTitle = (TextView) findViewById(R.id.tending_list_title);
         mGameInfo = (TextView) findViewById(R.id.tending_list_item_success);
-        if (mIcon != null && mTitle != null && mGameInfo != null) {
-            if(team.mImageURL != null && iconbitmap == null) {
-                new DownloadImageTask(mIcon, R.drawable.team).execute(team.mImageURL.toString());
+        if (mIconURL == null || !mIconURL.equals(team.mImageURL)) {
+            mIconURL = team.mImageURL;
+            mImageBitmap = null;
+        }
+        if (mImageView != null && mTitle != null && mGameInfo != null) {
+            mImageView.setImageResource(R.drawable.team);
+            if(team.mImageURL != null && (iconbitmap == null || mImageBitmap == null)) {
+                if (mDownloadTask != null)
+                    mDownloadTask.cancel(true);
+                mDownloadTask = new DownloadIconTask(this, R.drawable.team);
+                mDownloadTask.execute(team.mImageURL.toString());
+            } else if (mImageBitmap != null) {
+                mImageView.setImageBitmap(mImageBitmap);
             } else if (iconbitmap != null) {
-                mIconBitmap = iconbitmap;
-                mIcon.setImageBitmap(iconbitmap);
-            } else {
-                mIcon.setImageResource(R.drawable.team);
+                mImageBitmap = iconbitmap;
+                mImageView.setImageBitmap(iconbitmap);
             }
             mTitle.setText(team.mName);
             mGameInfo.setText(team.mShareOfVoice + "%");
@@ -59,39 +70,48 @@ public class TrendingListItem extends RelativeLayout {
     }
 
     public void bindView(TrendingPlayer player, Bitmap iconbitmap) {
-        mIcon = (ImageView) findViewById(R.id.tending_list_item_icon);
+        mImageView = (ImageView) findViewById(R.id.tending_list_item_icon);
         mTitle = (TextView) findViewById(R.id.tending_list_title);
         mGameInfo = (TextView) findViewById(R.id.tending_list_item_success);
-        mIconURL = player.mImageURL.toString();
-        if (mIcon != null && mTitle != null && mGameInfo != null) {
-            mIconBitmap = null;
-            if(player.mImageURL != null && iconbitmap == null) {
-                new DownloadImageTask(mIcon, R.drawable.team).execute(player.mImageURL);
+        if (mIconURL == null || !mIconURL.equals(player.mImageURL)) {
+            mIconURL = player.mImageURL;
+            mImageBitmap = null;
+        }
+        if (mImageView != null && mTitle != null && mGameInfo != null) {
+            mImageView.setImageResource(R.drawable.player);
+            if(player.mImageURL != null && (iconbitmap == null || mImageBitmap == null)) {
+                if (mDownloadTask != null)
+                    mDownloadTask.cancel(true);
+                mDownloadTask = new DownloadIconTask(this, R.drawable.team);
+                mDownloadTask.execute(player.mImageURL.toString());
+            } else if (mImageBitmap != null) {
+                mImageView.setImageBitmap(mImageBitmap);
             } else if (iconbitmap != null) {
-                mIconBitmap = iconbitmap;
-                mIcon.setImageBitmap(iconbitmap);
-            } else {
-                mIcon.setImageResource(R.drawable.team);
+                mImageBitmap = iconbitmap;
+                mImageView.setImageBitmap(iconbitmap);
             }
             mTitle.setText(player.mName);
             mGameInfo.setText(player.mShareOfVoice + "%");
+        } else {
+            Log.e(TAG, "missing elements");
         }
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-        int mDefaultResId;
+    public class DownloadIconTask extends AsyncTask<String, Void, Bitmap> {
+        private TrendingListItem item;
+        private int mDefaultResId;
+        private String imgUrl;
 
-        public DownloadImageTask(ImageView bmImage, int defaultResId) {
-            this.bmImage = bmImage;
+        public DownloadIconTask(TrendingListItem bmImage, int defaultResId) {
+            item = bmImage;
             mDefaultResId = defaultResId;
         }
 
         protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
+            imgUrl = urls[0];
             Bitmap mIcon11 = null;
             try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
+                InputStream in = new java.net.URL(imgUrl).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
@@ -101,12 +121,15 @@ public class TrendingListItem extends RelativeLayout {
         }
 
         protected void onPostExecute(Bitmap result) {
-            mIconBitmap = result;
             if (result != null) {
-                bmImage.setImageBitmap(result);
+                AppDataCache.sIconCash.put(imgUrl, result);
+                mImageBitmap = result;
+                if (item.mIconURL != null && item.mIconURL.equals(imgUrl))
+                    item.mImageView.setImageBitmap(result);
             } else {
-                bmImage.setImageResource(mDefaultResId);
+                item.mImageView.setImageResource(mDefaultResId);
             }
         }
     }
+
 }

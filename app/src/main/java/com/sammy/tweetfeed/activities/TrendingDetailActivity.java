@@ -18,18 +18,14 @@ import com.sammy.tweetfeed.R;
 import com.sammy.tweetfeed.data.AppDataCache;
 import com.sammy.tweetfeed.data.Constants;
 import com.sammy.tweetfeed.data.DownloadImageTask;
+import com.sammy.tweetfeed.data.UserInfo;
 
 import java.io.InputStream;
 
 public class TrendingDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     // detail infos
-    private String mName = null;
-    private String mScreenName = null;
-    private String mTwitterHandle = null;
-    private String mImageURL = null;
-    private float mShareOfVoice = 0;
-    private boolean mIsTeam = true;
+    private UserInfo mUserInfo;
     // detail infos
 
     // detail ui
@@ -52,26 +48,21 @@ public class TrendingDetailActivity extends AppCompatActivity implements View.On
 
         mContext = this;
 
-        mName = getIntent().getStringExtra(Constants.KEY_NAME);
-        mScreenName = getIntent().getStringExtra(Constants.KEY_NICKNAME);
-        mTwitterHandle = getIntent().getStringExtra(Constants.KEY_TWITTER);
-        mImageURL = getIntent().getStringExtra(Constants.KEY_IMAGE_URL);
-        mShareOfVoice = getIntent().getFloatExtra(Constants.KEY_SHARE_VOICE, 0.0f);
-        mIsTeam = getIntent().getBooleanExtra(Constants.KEY_TEAM, true);
+        mUserInfo = UserInfo.fromIntent(getIntent());
 
         mImage = (ImageView) findViewById(R.id.trending_detail_image);
         mNameView = (TextView) findViewById(R.id.trending_detail_name);
         mNickNameView = (TextView) findViewById(R.id.trending_detail_nickname);
         mShareVoiceView = (TextView) findViewById(R.id.trending_detail_rating);
-        if (AppDataCache.sIconCash.containsKey(mImageURL)) {
-            mImage.setImageBitmap(AppDataCache.sIconCash.get(mImageURL));
+        if (AppDataCache.sIconCash.containsKey(mUserInfo.mImageURL)) {
+            mImage.setImageBitmap(AppDataCache.sIconCash.get(mUserInfo.mImageURL));
         } else {
-            new DownloadImageTask(mImage, mIsTeam ? R.drawable.team : R.drawable.player).execute(mImageURL);
-            mImage.setImageResource(mIsTeam ? R.drawable.team : R.drawable.player);
+            new DownloadIconTask(mImage, mUserInfo.mIsTeam ? R.drawable.team : R.drawable.player).execute(mUserInfo.mImageURL);
+            mImage.setImageResource(mUserInfo.mIsTeam ? R.drawable.team : R.drawable.player);
         }
-        mNameView.setText(mName);
-        mNickNameView.setText(mScreenName);
-        mShareVoiceView.setText(String.valueOf(mShareOfVoice));
+        mNameView.setText(mUserInfo.mName);
+        mNickNameView.setText(mUserInfo.mScreenName);
+        mShareVoiceView.setText(String.valueOf(mUserInfo.mShareOfVoice));
 
         mShowTweets = (Button) findViewById(R.id.trending_detail_show_tweets);
         mShowTweets.setOnClickListener(this);
@@ -79,7 +70,7 @@ public class TrendingDetailActivity extends AppCompatActivity implements View.On
         mShowActivity.setOnClickListener(this);
         mShowSentiment = (Button) findViewById(R.id.trending_detail_show_sentiment);
         mShowSentiment.setOnClickListener(this);
-        mShowTopics = (Button) findViewById(R.id.trending_detail_show_tweets);
+        mShowTopics = (Button) findViewById(R.id.trending_detail_show_topics);
         mShowTopics.setOnClickListener(this);
     }
 
@@ -90,15 +81,77 @@ public class TrendingDetailActivity extends AppCompatActivity implements View.On
 
                 Intent tweet_intent = new Intent();
                 tweet_intent.setClass(mContext, TweetListActivity.class);
-                tweet_intent.putExtra(Constants.KEY_TEAM, mIsTeam);
-
-                tweet_intent.putExtra(Constants.KEY_NAME, mName);
-                tweet_intent.putExtra(Constants.KEY_NICKNAME, mScreenName);
-                tweet_intent.putExtra(Constants.KEY_IMAGE_URL, mImageURL);
-                tweet_intent.putExtra(Constants.KEY_TWITTER, mTwitterHandle);
-                tweet_intent.putExtra(Constants.KEY_SHARE_VOICE, mShareOfVoice);
+                collectInfo(tweet_intent);
                 mContext.startActivity(tweet_intent);
                 break;
+            case R.id.trending_detail_show_activity:
+
+                Intent activity_intent = new Intent();
+                activity_intent.setClass(mContext, ActivityGraphAnalysis.class);
+                collectInfo(activity_intent);
+                mContext.startActivity(activity_intent);
+                break;
+            case R.id.trending_detail_show_sentiment:
+
+                Intent sentimental_intent = new Intent();
+                sentimental_intent.setClass(mContext, SentimentGraphAnalysis.class);
+                collectInfo(sentimental_intent);
+                mContext.startActivity(sentimental_intent);
+                break;
+            case R.id.trending_detail_show_topics:
+
+                Intent topics_intent = new Intent();
+                topics_intent.setClass(mContext, TrendingTopicsActivity.class);
+                collectInfo(topics_intent);
+                mContext.startActivity(topics_intent);
+                break;
+        }
+    }
+
+    private void collectInfo(Intent intent) {
+        intent.putExtra(Constants.KEY_TEAM, mUserInfo.mIsTeam);
+
+        intent.putExtra(Constants.KEY_NAME, mUserInfo.mName);
+        intent.putExtra(Constants.KEY_NICKNAME, mUserInfo.mScreenName);
+        intent.putExtra(Constants.KEY_IMAGE_URL, mUserInfo.mImageURL);
+        intent.putExtra(Constants.KEY_TWITTER, mUserInfo.mTwitterHandle);
+        intent.putExtra(Constants.KEY_SHARE_VOICE, mUserInfo.mShareOfVoice);
+    }
+
+    public class DownloadIconTask extends AsyncTask<String, Void, Bitmap> {
+        private ImageView imageView;
+        private int mDefaultResId;
+        private String imgUrl;
+
+        public DownloadIconTask(ImageView bmImage, int defaultResId) {
+            imageView = bmImage;
+            mDefaultResId = defaultResId;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            imgUrl = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(imgUrl).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            AppDataCache.sTweetIconCash.put(imgUrl, result);
+            if (result != null) {
+                AppDataCache.sDownloadingURL.remove(imgUrl);
+                AppDataCache.sDownloadedURL.put(imgUrl, true);
+                imageView.setImageBitmap(result);
+            } else {
+                AppDataCache.sDownloadingURL.remove(imgUrl);
+                AppDataCache.sDownloadedURL.put(imgUrl, false);
+                imageView.setImageResource(mDefaultResId);
+            }
         }
     }
 

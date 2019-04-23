@@ -2,6 +2,7 @@ package com.sammy.tweetfeed.listview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,11 @@ public class TrendingPlayerListAdapter extends ArrayAdapter<TrendingPlayer> {
     public View getView(int position, View convertView, ViewGroup parent) {
         TrendingPlayer item = getItem(position);
         TrendingListItem item_view;
+        if (position == 0) {
+            Log.e("comet____", "url: " + item.mImageURL);
+        }
         if (convertView != null) {
             item_view = (TrendingListItem) convertView;
-            if (item_view.mIconBitmap != null && !AppDataCache.sIconCash.containsKey(item_view.mIconURL)) {
-                AppDataCache.sIconCash.put(item_view.mIconURL, item_view.mIconBitmap);
-            } else {
-                item_view.mIconBitmap = null;
-            }
         } else {
             item_view = (TrendingListItem) LayoutInflater.from(mContext).inflate(R.layout.tending_list_item, null);
         }
